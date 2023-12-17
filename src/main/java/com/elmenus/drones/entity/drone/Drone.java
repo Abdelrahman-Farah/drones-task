@@ -10,6 +10,7 @@ public class Drone {
     @Column(name = "serial_number")
     private String serialNumber;
 
+    @Enumerated(value = EnumType.STRING)
     private DroneModel model;
 
     @Column(name = "weight_limit")
@@ -18,6 +19,7 @@ public class Drone {
     @Column(name = "battery_capacity")
     private int batteryCapacity;
 
+    @Enumerated(value = EnumType.STRING)
     private DroneState state;
 
     public Drone(){
