@@ -22,4 +22,9 @@ public class DroneServiceImpl implements DroneService {
     public List<Drone> findALL() {
         return droneRepository.findAll();
     }
+
+    @Override
+    public Drone save(Drone drone) {
+        return droneRepository.save(drone);
+    }
 }
