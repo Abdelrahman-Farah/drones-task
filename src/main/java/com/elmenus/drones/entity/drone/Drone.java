@@ -96,6 +96,14 @@ public class Drone {
         this.state = state;
     }
 
+    public List<Medication> getMedications() {
+        return medications;
+    }
+
+    public void setMedications(List<Medication> medications) {
+        this.medications = medications;
+    }
+
     @Override
     public String toString() {
         return "Drone{" +

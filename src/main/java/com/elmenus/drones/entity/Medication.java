@@ -1,6 +1,7 @@
 package com.elmenus.drones.entity;
 
 import com.elmenus.drones.entity.drone.Drone;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -37,8 +38,9 @@ public class Medication {
     private String image;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "drone_sn")
+    @JsonIgnore
     private Drone drone;
 
     public Medication() {

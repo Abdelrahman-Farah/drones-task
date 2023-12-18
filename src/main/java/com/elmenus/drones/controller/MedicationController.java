@@ -52,6 +52,6 @@ public class MedicationController {
         System.out.println(medicationDTO);
         System.out.println(bindingResult);
         Medication medication = medicationService.save(medicationDTO, drone);
-        return  ResponseEntity.ok(medication);
+        return  ResponseEntity.ok(medicationDTO);
     }
 }

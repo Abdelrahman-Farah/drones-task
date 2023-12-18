@@ -42,6 +42,13 @@ public class DroneController {
         return ResponseEntity.ok(drone);
     }
 
+    @GetMapping("/{drone_sn}")
+    public ResponseEntity<?> getDroneInfo (@PathVariable("drone_sn") String drone_sn){
+        Drone drone = droneService.findById(drone_sn);
+        drone.getMedications();
+        return ResponseEntity.ok(drone);
+    }
+
 
     @ExceptionHandler
     public ResponseEntity<?>handle(HttpMessageNotReadableException e){
