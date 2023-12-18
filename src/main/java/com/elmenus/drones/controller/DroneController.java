@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -44,5 +45,11 @@ public class DroneController {
         }
 
         return ResponseEntity.ok(drone);
+    }
+
+
+    @ExceptionHandler
+    public ResponseEntity<?>handle(HttpMessageNotReadableException e){
+        return ResponseEntity.badRequest().body("You entered Invalid values");
     }
 }
