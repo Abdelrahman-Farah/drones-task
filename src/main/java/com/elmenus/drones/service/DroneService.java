@@ -9,4 +9,6 @@ public interface DroneService {
     List<Drone> findALL();
 
     Drone save(Drone drone);
+
+    Drone findById(String id);
 }

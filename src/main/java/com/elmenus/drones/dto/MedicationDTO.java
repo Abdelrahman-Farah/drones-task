@@ -1,20 +1,14 @@
-package com.elmenus.drones.entity;
+package com.elmenus.drones.dto;
 
 import com.elmenus.drones.entity.drone.Drone;
-import jakarta.persistence.*;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-@Entity
-@Table(name = "medication")
-public class Medication {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class MedicationDTO {
     @NotNull
     @Pattern(
             regexp = "[a-zA-Z_0-9-]+",
@@ -37,28 +31,7 @@ public class Medication {
     private String image;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "drone_sn")
-    private Drone drone;
-
-    public Medication() {
-    }
-
-    public Medication(String name, int weight, String code, String image, Drone drone) {
-        this.name = name;
-        this.weight = weight;
-        this.code = code;
-        this.image = image;
-        this.drone = drone;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String drone_sn;
 
     public String getName() {
         return name;
@@ -92,23 +65,22 @@ public class Medication {
         this.image = image;
     }
 
-    public Drone getDrone() {
-        return drone;
+    public String getDrone_sn() {
+        return drone_sn;
     }
 
-    public void setDrone(Drone drone) {
-        this.drone = drone;
+    public void setDrone_sn(String drone_sn) {
+        this.drone_sn = drone_sn;
     }
 
     @Override
     public String toString() {
-        return "Medication{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+        return "MedicationDTO{" +
+                "name='" + name + '\'' +
                 ", weight=" + weight +
                 ", code='" + code + '\'' +
                 ", image='" + image + '\'' +
-                ", drone=" + drone +
+                ", drone_sn='" + drone_sn + '\'' +
                 '}';
     }
 }

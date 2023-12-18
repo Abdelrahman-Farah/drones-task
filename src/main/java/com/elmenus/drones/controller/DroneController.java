@@ -5,18 +5,12 @@ import com.elmenus.drones.entity.drone.Drone;
 import com.elmenus.drones.service.DroneService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/drones")
@@ -44,6 +38,7 @@ public class DroneController {
             return ResponseEntity.badRequest().body(messages);
         }
 
+        droneService.save(drone);
         return ResponseEntity.ok(drone);
     }
 

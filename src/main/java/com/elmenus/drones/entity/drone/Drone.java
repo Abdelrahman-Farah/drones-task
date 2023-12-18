@@ -1,10 +1,13 @@
 package com.elmenus.drones.entity.drone;
 
+import com.elmenus.drones.entity.Medication;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.util.List;
 
 @Entity
 @Table(name = "drone")
@@ -37,6 +40,9 @@ public class Drone {
     @NotNull(message="this field is required")
     @Enumerated(value = EnumType.STRING)
     private DroneState state;
+
+    @OneToMany(mappedBy = "drone")
+    private List<Medication> medications;
 
     public Drone(){
 
