@@ -42,16 +42,33 @@ public class MedicationController {
             BindingResult bindingResult
     ){
         Drone drone = droneService.findById(medicationDTO.getDrone_sn());
-        if (bindingResult.hasErrors() || drone == null){
-            var messages = ValidationErrorResponse.serializeErrorResult(bindingResult);
-            if (drone == null){
-                messages.put("drone_sn", "Invalid drone serial number");
-            }
+
+        var messages = ValidationErrorResponse.serializeErrorResult(bindingResult);
+        if (drone == null){
+            messages.put("drone_sn", "Invalid drone serial number");
+        }
+
+        int sum = 0;
+        List<Medication> medications = drone.getMedications();
+        for(Medication medication : medications){
+            sum += medication.getWeight();
+        }
+        int remaining = drone.getWeightLimit() - sum;
+
+        if (remaining < medicationDTO.getWeight()){
+            messages.put("drone_sn", "no enough space");
+        }
+        System.out.println(sum);
+        System.out.println(drone.getWeightLimit());
+        System.out.println(remaining);
+        System.out.println(messages.size());
+
+
+        if (!messages.isEmpty()){
             return ResponseEntity.badRequest().body(messages);
         }
-        System.out.println(medicationDTO);
-        System.out.println(bindingResult);
-        Medication medication = medicationService.save(medicationDTO, drone);
+
+        medicationService.save(medicationDTO, drone);
         return  ResponseEntity.ok(medicationDTO);
     }
 }
