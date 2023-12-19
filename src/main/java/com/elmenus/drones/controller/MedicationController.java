@@ -41,28 +41,25 @@ public class MedicationController {
             @Valid @RequestBody MedicationDTO medicationDTO,
             BindingResult bindingResult
     ){
-        Drone drone = droneService.findById(medicationDTO.getDrone_sn());
 
         var messages = ValidationErrorResponse.serializeErrorResult(bindingResult);
+
+        Drone drone = droneService.findById(medicationDTO.getDrone_sn());
         if (drone == null){
             messages.put("drone_sn", "Invalid drone serial number");
         }
+        else {
+            int sum = 0;
+            List<Medication> medications = drone.getMedications();
+            for(Medication medication : medications){
+                sum += medication.getWeight();
+            }
+            int remaining = drone.getWeightLimit() - sum;
 
-        int sum = 0;
-        List<Medication> medications = drone.getMedications();
-        for(Medication medication : medications){
-            sum += medication.getWeight();
+            if (remaining < medicationDTO.getWeight()){
+                messages.put("drone_sn", "no enough space");
+            }
         }
-        int remaining = drone.getWeightLimit() - sum;
-
-        if (remaining < medicationDTO.getWeight()){
-            messages.put("drone_sn", "no enough space");
-        }
-        System.out.println(sum);
-        System.out.println(drone.getWeightLimit());
-        System.out.println(remaining);
-        System.out.println(messages.size());
-
 
         if (!messages.isEmpty()){
             return ResponseEntity.badRequest().body(messages);

@@ -1,6 +1,7 @@
 package com.elmenus.drones.service.impl;
 
 import com.elmenus.drones.entity.drone.Drone;
+import com.elmenus.drones.entity.drone.DroneState;
 import com.elmenus.drones.repository.DroneRepository;
 import com.elmenus.drones.service.DroneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,10 @@ public class DroneServiceImpl implements DroneService {
         Optional<Drone> drone = droneRepository.findById(id);
 
         return drone.orElse(null);
+    }
+
+    @Override
+    public List<Drone> getAllByState(DroneState droneState) {
+        return droneRepository.getAllByState(droneState);
     }
 }
