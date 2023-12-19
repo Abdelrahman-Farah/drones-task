@@ -33,6 +33,14 @@ public class MedicationDTO {
     @NotNull
     private String drone_sn;
 
+    public MedicationDTO(String name, int weight, String code, String image, String drone_sn) {
+        this.name = name;
+        this.weight = weight;
+        this.code = code;
+        this.image = image;
+        this.drone_sn = drone_sn;
+    }
+
     public String getName() {
         return name;
     }
