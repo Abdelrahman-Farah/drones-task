@@ -37,9 +37,7 @@ Body:
 }
 ```
 ---
----
----
----
+
 ### 2. loading a drone with medication
 ```http
 POST http://localhost:8080/medications/attach
@@ -56,9 +54,7 @@ Body:
 }
 ```
 ---
----
----
----
+
 ### 3. checking loaded medication items for a given drone
 ```http
 GET http://localhost:8080/drones/{DRONE_SN}
@@ -84,9 +80,7 @@ RESPONSE:
 }
 ```
 ---
----
----
----
+
 ### 4. checking available drones for loading
 ```http
 GET http://localhost:8080/drones/available
@@ -95,9 +89,7 @@ GET http://localhost:8080/drones/available
 - Returns dron objects with "IDLE" or "LOADING" states
 
 ---
----
----
----
+
 ### 5. check drone battery level for a given drone
 ```http
 GET http://localhost:8080/drones/{DRONE_SN}/battery
@@ -115,10 +107,7 @@ Response:
 
 
 ---
----
----
----
----
+
 ---
 
 ## Test
